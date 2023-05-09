@@ -1,0 +1,48 @@
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0 70px;
+
+  &__subtitle {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #A0A0A0;
+  }
+
+  &__links {
+    margin-top: 50px;
+    margin-bottom: 125px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__link {
+    height: 69px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #E8E8E8;
+
+    &:last-of-type {
+      height: 50px;
+      border: transparent;
+    }
+
+    &-text {
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 50px;
+      color: #000;
+    }
+
+    &-arrow {
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 60px;
+      color: #000;
+    }
+  }
+}
