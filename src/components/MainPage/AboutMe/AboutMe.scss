@@ -1,0 +1,100 @@
+.about-me {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0 70px;
+
+  &__info {
+    margin-top: 66px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+  }
+
+  &__name {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+  }
+
+  &__caption {
+    margin-top: 18px;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  &__summary {
+    margin-top: 26px;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  &__github-link {
+    margin-top: auto;
+
+    color: #000;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    transition: opacity .5s ease;
+
+    &:hover {
+      opacity: .5;
+    }
+  }
+
+  &__photo {
+    height: 327px;
+    width: 270px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .about-me {
+    padding: 0 50px;
+
+    &__info {
+      margin-bottom: 90px;
+    }
+
+    &__text {
+      max-width: 364px;
+    }
+
+    &__name {
+      font-size: 40px;
+      line-height: 40px;
+    }
+
+    &__caption {
+      margin-top: 16px;
+
+      font-size: 12px;
+      line-height: 18px;
+    }
+
+    &__summary {
+      margin-top: 20px;
+      
+      font-size: 12px;
+      line-height: 18px;
+    }
+
+    &__photo {
+      width: 255px;
+      height: 307px;
+    }
+  }
+}
