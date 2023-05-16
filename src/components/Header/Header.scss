@@ -164,3 +164,26 @@
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 18px 14px;
+
+    &__auth-block {
+      gap: 14px;
+    }
+
+    &__reg-btn {
+      font-size: 10px;
+      line-height: 16px;
+    }
+
+    &__login-btn {
+      width: 54px;
+      height: 26px;
+      
+      font-size: 10px;
+      line-height: 16px;
+    }
+  }
+}

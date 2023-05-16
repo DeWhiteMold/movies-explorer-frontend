@@ -23,3 +23,15 @@
     margin-top: 232px;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .welcome {
+    margin-top: 56px;
+    width: fit-content;
+    align-items: center;
+
+    &__text {
+      margin-top: 50px;
+    }
+  }
+}

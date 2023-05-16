@@ -98,3 +98,53 @@
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  .about-me {
+    padding: 0 14px;
+
+    &__info {
+      flex-direction: column-reverse;
+      align-items: center;
+      margin-top: 60px;
+      margin-bottom: 70px;
+    }
+
+    &__text {
+      width: 100%;
+    }
+
+    &__name {
+      margin-top: 40px;
+
+      font-size: 30px;
+      line-height: 36px;
+    }
+
+    &__caption {
+      margin-top: 20px;
+
+      font-size: 11px;
+      line-height: 16px;
+    }
+
+    &__summary {
+      margin-top: 20px;
+      
+      font-size: 11px;
+      line-height: 16px;
+    }
+
+    &__github-link {
+      margin-top: 40px;
+      
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    &__photo {
+      min-width: 292px;
+      height: 352px;
+    }
+  }
+}

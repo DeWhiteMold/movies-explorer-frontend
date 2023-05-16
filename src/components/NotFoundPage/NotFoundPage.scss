@@ -38,3 +38,26 @@
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  .not-found-page {
+    &__caption {
+      margin-top: calc(50vh - 50px);
+
+      font-size: 80px;
+      line-height: 97px;
+    }
+
+    &__subscription {
+      font-size: 12px;
+      line-height: 15px;
+    }
+
+    &__return-btn {
+      margin: auto 0 30px;
+      
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+}

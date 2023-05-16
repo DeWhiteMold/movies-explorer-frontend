@@ -14,3 +14,11 @@
     margin-top: 90px;
   }
 }
+
+@media screen and (max-width: 787px) {
+  .section-subtitle {
+    margin-top: 70px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

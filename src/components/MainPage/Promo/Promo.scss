@@ -39,3 +39,29 @@
     }
   }
 }
+
+@media screen and (max-width: 787px) {
+  .promo {
+    align-items: center;
+    padding: 74px 10px 0;
+    overflow: hidden;
+
+    &__title {
+      margin-top: 183px;
+      text-align: center;
+
+      font-size: 31px;
+      line-height: 39px;
+      letter-spacing: -0.04em;
+    }
+
+    &__img {
+      margin-top: 60px;
+      height: 320px;
+      width: 680px;
+      margin-bottom: 40px;
+      align-self: center;
+    }
+  }
+}
+

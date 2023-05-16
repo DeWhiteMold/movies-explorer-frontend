@@ -68,6 +68,7 @@
 
     &:hover {
       opacity: .5;
+      cursor: pointer;
     }
   }
 
@@ -101,6 +102,27 @@
 
     &__edit-btn {
       margin-top: 194px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile {
+    &__info {
+      margin-top: 144px;
+    }
+
+    &__form {
+      margin-top: 80px;
+      width: 260px;
+
+      &__edit-btn {
+        margin-top: auto;
+      }
+    }
+
+    &__exit-btn {
+      margin-bottom: 40px;
     }
   }
 }

@@ -61,15 +61,56 @@
       line-height: 18px;
     }
 
-    &__tehnologies {
+    &__technologies {
       margin-top: 83px;
     }
 
-    &__tehnology {
+    &__technology {
       margin-bottom: 90px;
 
       font-size: 12px;
       line-height: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 787px) {
+  .techs{
+    padding: 0 18px;
+
+    &__title {
+      margin-top: 60px;
+
+      font-size: 30px;
+      line-height: 36px;
+    }
+
+    &__caption {
+      margin-top: 24px;
+
+      font-size: 11px;
+      line-height: 16px;
+    }
+
+    &__technologies {
+      width: min-content;
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    &__technology {
+      width: 84px;
+      height: 57px;
+      margin-bottom: 0;
+
+      font-size: 12px;
+      line-height: 15px;
+
+      &:last-of-type {
+        margin-bottom: 70px;
+      }
     }
   }
 }

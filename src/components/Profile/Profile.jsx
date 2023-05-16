@@ -21,7 +21,6 @@ function Profile({user}) {
 
   return (
     <div className="profile">
-      <Header isLogged={true}/>
       <section className="profile__info">
         <h2 className="profile__welcome">{`Привет, ${user.name}!`}</h2>
         <form className="profile__form">

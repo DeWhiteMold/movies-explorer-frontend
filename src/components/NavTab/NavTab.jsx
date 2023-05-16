@@ -7,7 +7,7 @@ function NavTab({isOpen, onClose}) {
 
   return (
     <div className={`nav-tab ${!isOpen && 'nav-tab_hidden'}`}>
-      <div className="nav-tab__overlay" />
+      <div className="nav-tab__overlay" onClick={onClose} />
       <nav className="nav-tab__box">
         <button type="button" className="nav-tab__close-btn" onClick={onClose}/>
         <Link to="/" className={`nav-tab__link ${currentLocation === '/' && 'nav-tab__link_current'}`}>Главная</Link>
