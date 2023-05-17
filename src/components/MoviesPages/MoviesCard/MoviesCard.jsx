@@ -7,7 +7,7 @@ function MoviesCard({movie}) {
   const duration = timeConverter(movie.duration);
 
   return (
-    <div className={`movies-card ${isSavedMoviePage && 'movies-card_saved'}`}>
+    <li className={`movies-card ${isSavedMoviePage ? 'movies-card_saved' : ''}`}>
       <div className="movies-card__picture" style={{backgroundImage: `url(${movie.img})`}}>
         <button type="button" className={`movies-card__save-btn ${movie.saved ? 'movies-card__save-btn_saved' : 'movies-card__save-btn_not-saved'}`}>
           { !movie.saved && 'Сохранить' }
@@ -17,7 +17,7 @@ function MoviesCard({movie}) {
         <span className="movies-card__name">{movie.name}</span>
         <span className="movies-card__duration">{duration}</span>
       </div>
-    </div>
+    </li>
   )
 }
 

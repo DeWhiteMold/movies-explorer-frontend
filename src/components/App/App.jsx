@@ -20,6 +20,7 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Header onMenuClick={() => {setIsMenuOpne(state => !state)}}/>
+        <main className="main">
         <Routes>
           <Route path='*' element ={ <NotFoundPage /> } />
           <Route path='/' element={ <Main /> } />
@@ -30,6 +31,7 @@ function App() {
           <Route path='/signin' element={ <Login /> } />
         </Routes>
         <NavTab isOpen={isMenuOpen} onClose={() => {setIsMenuOpne(state => !state)}}/>
+        </main>
       </BrowserRouter>
     </div>
   );

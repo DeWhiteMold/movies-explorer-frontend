@@ -26,11 +26,11 @@ function Profile({user}) {
         <form className="profile__form">
           <div className="profile__input-line">
             <span className="profile__input-name">Имя</span>
-            <input type="text" className="profile__input" value={nameValue} onChange={handleNameChange} />
+            <input type="text" className="profile__input" required="true" value={nameValue} onChange={handleNameChange} />
           </div>
           <div className="profile__input-line">
             <span className="profile__input-name">E-mail</span>
-            <input type="text" className="profile__input" value={EmailValue} onChange={handleEmailChange}/>
+            <input type="text" className="profile__input" required="true" value={EmailValue} onChange={handleEmailChange}/>
           </div>
           <button type="submit" className="profile__edit-btn" onClick={handleSubmit}>Редактировать</button>
         </form>

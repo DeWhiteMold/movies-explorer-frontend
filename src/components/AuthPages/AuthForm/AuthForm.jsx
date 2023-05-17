@@ -25,16 +25,16 @@ function AuthForm() {
         currentLocation === '/signup' &&
           <div className="auth-form__input-box">
             <span className="auth-form__input-name">Имя</span>
-            <input type="text" className="auth-form__input" value={nameValue} onChange={handleNameChange} />
+            <input type="text" className="auth-form__input" required="true" value={nameValue} onChange={handleNameChange} />
           </div>
       }
       <div className="auth-form__input-box">
         <span className="auth-form__input-name">E-mail</span>
-        <input type="text" className="auth-form__input" value={emailValue} onChange={handleEmailChange}/>
+        <input type="text" className="auth-form__input" required="true" value={emailValue} onChange={handleEmailChange}/>
       </div>
       <div className="auth-form__input-box">
         <span className="auth-form__input-name">Пароль</span>
-        <input type="password" className="auth-form__input" value={passwordValue} onChange={handlePasswordChange}/>
+        <input type="password" className="auth-form__input" required="true" value={passwordValue} onChange={handlePasswordChange}/>
       </div>
       <span className="auth-form__error-text"> Что-то пошло не так... </span>
       <button type="submit" className="auth-form__submit-btn">
