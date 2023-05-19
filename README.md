@@ -1,2 +1,1 @@
-# movies-explorer-frontend
-frontend part of diploma projekt
+Мекет в Figma: https://disk.yandex.ru/d/BpWi6aboMtSg4A
