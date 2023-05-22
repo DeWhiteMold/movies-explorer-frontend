@@ -1,43 +1,81 @@
 import './AuthForm.scss';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { emailRegExp, nameRegExp } from '../../../utilits/regExps';
 
-function AuthForm() {
-  const navigate = useNavigate();
+function AuthForm({authError, onSubmit}) {
   const currentLocation = useLocation().pathname;
   const [nameValue, setNameValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [nameErrorText, setNameErrorText] = useState('');
+  const [emailErrorText, setEmailErrorText] = useState('');
+  const [passwordErrorText, setPasswordErrorText] = useState('');
 
   function handleNameChange(e) {
-    setNameValue(e.target.value)
+    const text = e.target.value
+    setNameValue(text);
+    if(text.match(nameRegExp) && text.trim()) {
+      setNameErrorText('');
+    } else {
+      setNameErrorText('Введите имя без спецсимволов');
+    }
   }
   function handleEmailChange(e) {
-    setEmailValue(e.target.value)
+    const text = e.target.value
+    setEmailValue(text);
+    if(text.match(emailRegExp) && text.trim()) {
+      setEmailErrorText('')
+    } else {
+      setEmailErrorText('Введите почту');
+    }
   }
   function handlePasswordChange(e) {
-    setPasswordValue(e.target.value)
+    const text = e.target.value
+    setPasswordValue(text);
+    if(text.trim()) {
+      setPasswordErrorText('')
+    } else {
+      setPasswordErrorText('Введите пароль');
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSubmit({
+      email: emailValue,
+      password: passwordValue,
+      ...(currentLocation === '/signup' && {name: nameValue})
+    })
   }
 
   return (
-    <form className="auth-form">
+    <form className="auth-form" onSubmit={handleSubmit}>
       {
         currentLocation === '/signup' &&
-          <div className="auth-form__input-box">
-            <span className="auth-form__input-name">Имя</span>
-            <input type="text" className="auth-form__input" required="true" value={nameValue} onChange={handleNameChange} />
-          </div>
+          <>
+            <div className="auth-form__input-box">
+              <span className="auth-form__input-name">Имя</span>
+              <input type="text" className="auth-form__input" required={true} value={nameValue} onChange={handleNameChange} />
+            </div>
+            <span className="auth-form__error-text">{nameErrorText}</span>
+          </>
       }
       <div className="auth-form__input-box">
         <span className="auth-form__input-name">E-mail</span>
-        <input type="text" className="auth-form__input" required="true" value={emailValue} onChange={handleEmailChange}/>
+        <input type="text" className="auth-form__input" required={true} value={emailValue} onChange={handleEmailChange}/>
       </div>
+      <span className="auth-form__error-text">{emailErrorText}</span>
       <div className="auth-form__input-box">
         <span className="auth-form__input-name">Пароль</span>
-        <input type="password" className="auth-form__input" required="true" value={passwordValue} onChange={handlePasswordChange}/>
+        <input type="password" className="auth-form__input" required={true} value={passwordValue} onChange={handlePasswordChange}/>
       </div>
-      <span className="auth-form__error-text"> Что-то пошло не так... </span>
-      <button type="submit" className="auth-form__submit-btn">
+      <span className="auth-form__error-text">{authError ? authError : passwordErrorText}</span>
+      <button type="submit" className="auth-form__submit-btn"
+        disabled={
+          (currentLocation === '/signup' && !nameValue) || !emailValue || !passwordValue || nameErrorText || emailErrorText || passwordErrorText
+        }
+      >
         {
           currentLocation === '/signup' ? 'Зарегистрироваться' : 'Войти'
         }

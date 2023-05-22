@@ -1,28 +1,57 @@
 import './Profile.scss';
-import Header from '../Header/Header';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import mainApi from '../../utilits/MainApi';
+import { emailRegExp, nameRegExp } from '../../utilits/regExps';
 
-function Profile({user}) {
-  const [nameValue, setNameValue] = useState(user.name);
-  const [EmailValue, setEmailValue] = useState(user.email);
+function Profile() {
+  const currentUser = useContext(CurrentUserContext)
+  const [nameValue, setNameValue] = useState(currentUser.name);
+  const [EmailValue, setEmailValue] = useState(currentUser.email);
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   function handleNameChange(e) {
-    setNameValue(e.target.value);
+    const text = e.target.value
+    setNameValue(text);
+    if(text.match(nameRegExp) && text.trim()) {
+      setNameError(false);
+    } else {
+      setNameError(true);
+    }
   } 
 
   function handleEmailChange(e) {
-    setEmailValue(e.target.value);
+    const text = e.target.value
+    setEmailValue(text);
+    if(text.match(emailRegExp) && text.trim()) {
+      setEmailError(false)
+    } else {
+      setEmailError(true);
+    }
   } 
 
   function handleSubmit(e) {
     e.preventDefault()
+    if(!nameError || !emailError) {
+      mainApi.getUserInfo({
+        name: nameValue,
+        email: EmailValue
+      })
+        .catch((err) => console.log(err))
+
+    }
+  }
+
+  function handleExit() {
+    localStorage.removeItem('JWT')
   }
 
   return (
     <div className="profile">
       <section className="profile__info">
-        <h2 className="profile__welcome">{`Привет, ${user.name}!`}</h2>
+        <h2 className="profile__welcome">{`Привет, ${currentUser.name}!`}</h2>
         <form className="profile__form">
           <div className="profile__input-line">
             <span className="profile__input-name">Имя</span>
@@ -34,7 +63,7 @@ function Profile({user}) {
           </div>
           <button type="submit" className="profile__edit-btn" onClick={handleSubmit}>Редактировать</button>
         </form>
-        <Link to="/signin" className="profile__exit-btn">Выйти из Аккаунта</Link>
+        <Link to="/signin" className="profile__exit-btn" onClick={handleExit}>Выйти из Аккаунта</Link>
       </section>
     </div>
   )

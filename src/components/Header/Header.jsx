@@ -2,16 +2,19 @@ import './Header.scss';
 import profileIcon from '../../images/profileIcon.svg';
 import menuIcon from '../../images/menuIcon.svg';
 import { Link, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Header({onMenuClick}) {
   const currentLocation = useLocation().pathname;
+  const currentUser = useContext(CurrentUserContext)
 
   return (
     (currentLocation === '/' || currentLocation === '/movies' || currentLocation === '/saved-movies' || currentLocation === '/profile') &&
       <header className={`header ${ currentLocation === '/' ? 'header_main-page' : ''}`}>
         <Link to='/' className="header__logo"> </Link>
         {
-          currentLocation !== '/' ? 
+          localStorage.getItem('JWT') !== '/' ? 
           <>
             <nav className="header__nav">
               <Link to='/movies' className={`header__nav-item ${ currentLocation === '/movies' ? 'header__nav-item_selected' : '' }`}>Фильмы</Link>
