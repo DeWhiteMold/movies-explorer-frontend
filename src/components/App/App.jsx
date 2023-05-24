@@ -22,10 +22,21 @@ function App() {
     email: '',
   });
 
+  function loadUserInfo(token) {
+    if (localStorage.getItem('JWT') || token) {
+      mainApi.getUserInfo(token)
+        .then(res => setCurrentUser(res.data))
+    } else {
+      setCurrentUser({
+        name: '',
+        email: '',
+      })
+    }
+  }
+
   useEffect(() => {
-    mainApi.getUserInfo()
-      .then(res => setCurrentUser(res.data))
-  }, [localStorage.getItem('JWT')])
+    loadUserInfo();
+  }, [])
 
   return (
     <div className="app">
@@ -38,11 +49,11 @@ function App() {
             <Route path='/' element={ <Main /> } />
             <Route path='/movies' element={ <ProtectedRouteElement element={ <Movies /> } />} />
             <Route path='/saved-movies' element={ <ProtectedRouteElement element={ <SavedMovies /> }/> } />
-            <Route path='/profile' element={ <ProtectedRouteElement element={ <Profile /> }/> } />
-            <Route path='/signup' element={ <Register /> } />
-            <Route path='/signin' element={ <Login /> } />
+            <Route path='/profile' element={ <ProtectedRouteElement element={ <Profile onEdit={loadUserInfo}/> }/> } />
+            <Route path='/signup' element={ <Register onLogin={loadUserInfo}/> } />
+            <Route path='/signin' element={ <Login onLogin={loadUserInfo}/> } />
           </Routes>
-          <NavTab isOpen={isMenuOpen} onClose={() => {setIsMenuOpne(state => !state)}}/>
+          <NavTab isOpen={isMenuOpen} onClose={() => {setIsMenuOpne(state => !state)}} />
           </main>
         </BrowserRouter>
       </CurrentUserContext.Provider>

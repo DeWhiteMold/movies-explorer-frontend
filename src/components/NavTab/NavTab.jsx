@@ -10,10 +10,10 @@ function NavTab({isOpen, onClose}) {
       <div className="nav-tab__overlay" onClick={onClose} />
       <nav className="nav-tab__box">
         <button type="button" className="nav-tab__close-btn" onClick={onClose}/>
-        <Link to="/" className={`nav-tab__link ${currentLocation === '/' && 'nav-tab__link_current'}`}>Главная</Link>
-        <Link to="/movies" className={`nav-tab__link ${currentLocation === '/movies' && 'nav-tab__link_current'}`}>Фильмы</Link>
-        <Link to="/saved-movies" className={`nav-tab__link ${currentLocation === '/saved-movies' && 'nav-tab__link_current'}`}>Сохранённые фильмы</Link>
-        <Link to="/profile" className="nav-tab__profile-btn">
+        <Link to="/" className={`nav-tab__link ${currentLocation === '/' && 'nav-tab__link_current'}`} onClick={onClose} >Главная</Link>
+        <Link to="/movies" className={`nav-tab__link ${currentLocation === '/movies' && 'nav-tab__link_current'}`} onClick={onClose} >Фильмы</Link>
+        <Link to="/saved-movies" className={`nav-tab__link ${currentLocation === '/saved-movies' && 'nav-tab__link_current'}`} onClick={onClose} >Сохранённые фильмы</Link>
+        <Link to="/profile" className="nav-tab__profile-btn" onClick={onClose}>
           <img src={profileIcon} alt="профиль" className="nav-tab__profile-btn-img" />
           <span className="nav-tab__profile-btn-text">Аккаунт</span>
         </Link>

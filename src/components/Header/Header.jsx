@@ -14,7 +14,7 @@ function Header({onMenuClick}) {
       <header className={`header ${ currentLocation === '/' ? 'header_main-page' : ''}`}>
         <Link to='/' className="header__logo"> </Link>
         {
-          localStorage.getItem('JWT') !== '/' ? 
+          currentUser.name ? 
           <>
             <nav className="header__nav">
               <Link to='/movies' className={`header__nav-item ${ currentLocation === '/movies' ? 'header__nav-item_selected' : '' }`}>Фильмы</Link>

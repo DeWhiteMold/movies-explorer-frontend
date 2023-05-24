@@ -16,9 +16,14 @@ class MainApi {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getUserInfo() {
+  getUserInfo(token) {
+    if(token) {
+      this._token = token 
+    }
     return fetch(`${this._url}/users/me`, {
-      headers: this._headers
+      headers: {
+        authorization: `Bearer ${this._token}`
+      }
     })
     .then((res) => this._getResponse(res))
   }

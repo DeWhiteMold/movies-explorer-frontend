@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 const ProtectedRouteElement = ({element}) => {
-  return localStorage.getItem("JWT") ? element : <Navigate to="/signin" replace />
+  return Boolean(localStorage.getItem("JWT")) ? element : <Navigate to="/" replace />
 }
 
 export default ProtectedRouteElement;

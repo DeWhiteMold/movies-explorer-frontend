@@ -1,26 +1,80 @@
 import './SavedMovies.scss';
-import Header from '../../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import ExtraMoviesButton from '../ExtraMoviesButton/ExtraMoviesButton';
 import Footer from '../../Footer/Footer';
+import { useEffect, useState } from 'react';
+import mainApi from '../../../utilits/MainApi';
 
-function SavedMovies({cards}) {
-  const savedCards = cards.filter((card) => {
-    if(card.saved) {
-      return card
-    }
-  })
+function SavedMovies() {
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [filterParams, setFilterParams] = useState(
+    localStorage.getItem('savedMoviesParams') ? 
+      JSON.parse(localStorage.getItem('savedMoviesParams')) : 
+      { name: null, short: false}
+  );
+  const [isSearched, setIsSearced] = useState(false);
 
-  console.log(savedCards);
+  function handleSearch(newParaps) {
+    setIsSearced(true)
+    filterMovies(newParaps)
+  }
+
+  function filterMovies(filterParams) {
+    setFilterParams(filterParams)
+    setIsLoading(true);
+    let filteredMovies = [];
+    filteredMovies = savedMovies.filter(movie => 
+      (filterParams.short ? movie.duration <= 40 : true) && ( movie.nameEN.toLowerCase().includes(filterParams.name) || movie.nameRU.toLowerCase().includes(filterParams.name) )
+    )
+    setMovies(filteredMovies);
+    setIsLoading(false);
+    localStorage.setItem('savedMoviesParams', JSON.stringify(filterParams))
+  }
+
+  async function handleDelete(movie) {
+    await mainApi.deleteMovie(movie._id)
+      .then((res) => {
+        loadMovies();
+      })
+  }
+
+  async function loadMovies() {
+    setIsLoading(true)
+    await mainApi.getMovies()
+      .then((res) => {
+        const savedMovies = res.data.map((movie) => {
+          movie['isLiked'] = true;
+          return movie
+        })
+        setSavedMovies(savedMovies)
+      })
+      .finally(setIsLoading(false))
+  }
+
+  useEffect(() => {
+    setIsLoading(true)
+    loadMovies()
+      .then(() => {
+        if(localStorage.getItem('savedMoviesParams')) {
+          setFilterParams(filterParams)
+        }
+        setIsLoading(false)
+      })
+  }, [])
+
+  useEffect(() => { filterMovies(filterParams) }, [savedMovies])
 
   return (
     <div className="saved-movies">
-      <SearchForm />
-      {/* <Preloader /> */}
-      <MoviesCardList cards={savedCards} />
-      <ExtraMoviesButton show={false}/>
+      <SearchForm  onSearch={handleSearch} movies={movies} filterParams={filterParams}/>
+      {
+        isLoading ? 
+          <Preloader /> :
+          <MoviesCardList movies={movies} filter={filterParams} onLike={handleDelete} isSearched={isSearched} />
+      }
       <Footer />
     </div>
   )

@@ -19,6 +19,8 @@
     padding: 14px;
 
     &:hover {
+      cursor: pointer;
+
       .movies-card__save-btn_not-saved {
         width: 72px;
         color: #000;
