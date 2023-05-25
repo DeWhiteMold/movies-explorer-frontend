@@ -21,7 +21,7 @@ function MoviesCard({movie, onLike}) {
   return (
     <li className={`movies-card ${isSavedMoviePage ? 'movies-card_saved' : ''}`}>
       <div className="movies-card__picture" onClick={openTrailer}
-        style={{backgroundImage: `url(${movie.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image})`}}
+        style={{backgroundImage: `url(${movie?.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image})`}}
       >
         <button type="button" onClick={handleMovieLike} ref={buttonRef}
           className={`movies-card__save-btn ${movie.isLiked ? 'movies-card__save-btn_saved' : 'movies-card__save-btn_not-saved'}`}

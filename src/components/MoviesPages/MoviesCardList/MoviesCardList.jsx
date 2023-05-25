@@ -24,8 +24,8 @@ function MoviesCardList({movies, onLike, filter, isSearched}) {
     } else if (window.innerWidth > 767) {
       setShownMovies(movies.slice(0, 8));
       setAddedMovieAmoutn(2)
-    } else {
-      setShownMovies([movies.slice(0, 5)])
+    } else if (window.innerWidth < 768) {
+      setShownMovies(movies.slice(0, 5))
       setAddedMovieAmoutn(1)
     }
   }
