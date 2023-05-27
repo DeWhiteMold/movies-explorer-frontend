@@ -18,9 +18,11 @@ function Register({onLogin}) {
         mainApi.signin( {password: inputData.name, email: inputData.email} )
           .then((res) => {
             localStorage.setItem('JWT', res.token)
+            console.log(res.token);
             onLogin(res.token);
           })
           .then(() => {
+            console.log(localStorage.getItem('JWT'));
             navigate('/', {replace: true})
             setAuthError('')
           })

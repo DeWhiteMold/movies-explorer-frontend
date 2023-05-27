@@ -53,6 +53,14 @@ class MainApi {
       body: JSON.stringify(inputData)
     })
     .then((res) => this._getResponse(res))
+    .then((res) => {
+      this._token = res.token;
+      this._headers =  {
+        authorization: `Bearer ${this._token}`,
+        'Content-type': 'application/json'
+      }
+      return res
+    })
   }
 
   getMovies() {
