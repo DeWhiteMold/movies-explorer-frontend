@@ -10,11 +10,7 @@ function SavedMovies() {
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [filterParams, setFilterParams] = useState(
-    localStorage.getItem('savedMoviesParams') ? 
-      JSON.parse(localStorage.getItem('savedMoviesParams')) : 
-      { name: null, short: false}
-  );
+  const [filterParams, setFilterParams] = useState({ name: '', short: false});
   const [isSearched, setIsSearced] = useState(false);
 
   function handleSearch(newParaps) {
@@ -23,7 +19,6 @@ function SavedMovies() {
   }
 
   function filterMovies(filterParams) {
-    setFilterParams(filterParams)
     setIsLoading(true);
     let filteredMovies = [];
     filteredMovies = savedMovies.filter(movie => 
@@ -31,7 +26,6 @@ function SavedMovies() {
     )
     setMovies(filteredMovies);
     setIsLoading(false);
-    localStorage.setItem('savedMoviesParams', JSON.stringify(filterParams))
   }
 
   async function handleDelete(movie) {
@@ -58,9 +52,7 @@ function SavedMovies() {
     setIsLoading(true)
     loadMovies()
       .then(() => {
-        if(localStorage.getItem('savedMoviesParams')) {
-          setFilterParams(filterParams)
-        }
+        setFilterParams(filterParams)
         setIsLoading(false)
       })
   }, [])

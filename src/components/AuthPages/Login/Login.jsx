@@ -16,7 +16,7 @@ function Login({onLogin}) {
         onLogin(res.token);
       })
       .then(() => {
-        navigate('/', {replace: true})
+        navigate('/movies', {replace: true})
         setAuthError('')
       })
       .catch((err) => {
@@ -35,7 +35,7 @@ function Login({onLogin}) {
 
   useEffect(() => {
     if(localStorage.getItem('JWT')) {
-      navigate('/movies', {replace: true})
+      navigate('/', {replace: true})
     }
   }, [])
 
