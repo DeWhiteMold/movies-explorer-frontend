@@ -23,7 +23,7 @@ function Register({onLogin}) {
           })
           .then(() => {
             console.log(localStorage.getItem('JWT'));
-            navigate('/', {replace: true})
+            navigate('/movies', {replace: true})
             setAuthError('')
           })
       })

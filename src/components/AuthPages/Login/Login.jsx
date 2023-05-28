@@ -35,7 +35,7 @@ function Login({onLogin}) {
 
   useEffect(() => {
     if(localStorage.getItem('JWT')) {
-      navigate('/', {replace: true})
+      navigate('/movies', {replace: true})
     }
   }, [])
 
