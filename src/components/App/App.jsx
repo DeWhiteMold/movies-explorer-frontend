@@ -22,9 +22,9 @@ function App() {
     email: '',
   });
 
-  function loadUserInfo(token) {
-    if (localStorage.getItem('JWT') || token) {
-      mainApi.getUserInfo(token)
+  function loadUserInfo() {
+    if (localStorage.getItem('JWT')) {
+      mainApi.getUserInfo()
         .then(res => setCurrentUser(res.data))
     } else {
       setCurrentUser({
