@@ -48,8 +48,8 @@ function Profile({onEdit}) {
           setEditStatus('Успешно')
         })
         .catch((err) => {
-          if(err === 'Ошибка: 404') {
-            setEditStatus('Пользователь не найден');
+          if(err === 'Ошибка: 409') {
+            setEditStatus('Почта уже используется');
           } else {
             setEditStatus('Что-то пошло не так');
           }
