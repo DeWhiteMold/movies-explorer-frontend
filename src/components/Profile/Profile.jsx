@@ -37,8 +37,7 @@ function Profile({onEdit}) {
     e.preventDefault()
     if(
         ( !nameError || !emailError ) &&
-        nameValue !== currentUser.name && 
-        emailValue !== currentUser.email
+        (nameValue !== currentUser.name || emailValue !== currentUser.email)
       ) {
       mainApi.updateUserInfo({
         name: nameValue,
@@ -49,8 +48,8 @@ function Profile({onEdit}) {
           setEditStatus('Успешно')
         })
         .catch((err) => {
-          if(err === 'Ошибка: 409') {
-            setEditStatus('Почта уже используется');
+          if(err === 'Ошибка: 404') {
+            setEditStatus('Пользователь не найден');
           } else {
             setEditStatus('Что-то пошло не так');
           }
@@ -90,7 +89,7 @@ function Profile({onEdit}) {
             <input type="text" className="profile__input" required={true} value={emailValue} onChange={handleEmailChange}/>
           </div>
           <button type="submit" onClick={handleSubmit}
-             className={`profile__edit-btn ${(nameError || emailError  || nameValue === currentUser.name || emailValue === currentUser.email) && 'profile__edit-btn_disabled'} && `} >
+             className={`profile__edit-btn ${(nameError || emailError  || (nameValue === currentUser.name && emailValue === currentUser.email)) && 'profile__edit-btn_disabled'} && `} >
               Редактировать
           </button>
         </form>
