@@ -35,8 +35,7 @@ function MoviesCardList({movies, onLike, filter, isSearched}) {
   }, [filter])
 
   useEffect(() => {
-    if (didMount < 3) {
-      setDidMount(didMount + 1)
+    if (movies.length) {
       mountMovies()
     }
   }, [movies])
