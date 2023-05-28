@@ -15,7 +15,7 @@ function Register({onLogin}) {
         setAuthError('')
       })
       .then(() => {
-        mainApi.signin( {password: inputData.name, email: inputData.email} )
+        mainApi.signin( {password: inputData.password, email: inputData.email} )
           .then((res) => {
             localStorage.setItem('JWT', res.token)
             console.log(res.token);
