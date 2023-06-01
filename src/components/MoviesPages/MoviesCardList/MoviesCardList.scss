@@ -7,6 +7,13 @@
   column-gap: 30px;
   row-gap: 59px;
   align-items: center;
+
+  &__no-result-span {
+    grid-column: 1 / 3;
+    text-align: center;
+    font-size: 40px;
+    opacity: .2;
+  }
 }
 
 @media screen and (max-width: 1279px) {
@@ -19,7 +26,7 @@
 
 @media screen and (max-width: 767px) {
   .movies-card-list {
-    min-width: 0;
+    // min-width: 0;
     width: 100%;
     padding: 40px 10px 13px;
     display: flex;

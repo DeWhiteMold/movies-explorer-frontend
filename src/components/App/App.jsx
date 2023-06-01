@@ -1,7 +1,7 @@
 import './App.scss';
 import '../MainPage/Main/Main';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Header from '../Header/Header';
 import NavTab from '../NavTab/NavTab';
@@ -11,28 +11,52 @@ import SavedMovies from '../MoviesPages/SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Register from '../AuthPages/Register/Register';
 import Login from '../AuthPages/Login/Login';
-import { cards, user } from './tempruaryData';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import ProtectedRouteElement from '../../utilits/ProtectedRoute';
+import mainApi from '../../utilits/MainApi';
 
 function App() {
   const [isMenuOpen, setIsMenuOpne] = useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    name: '',
+    email: '',
+  });
+
+  function loadUserInfo() {
+    if (localStorage.getItem('JWT')) {
+      mainApi.getUserInfo()
+        .then(res => setCurrentUser(res.data))
+    } else {
+      setCurrentUser({
+        name: '',
+        email: '',
+      })
+    }
+  }
+
+  useEffect(() => {
+    loadUserInfo();
+  }, [])
 
   return (
     <div className="app">
-      <BrowserRouter>
-        <Header onMenuClick={() => {setIsMenuOpne(state => !state)}}/>
-        <main className="main">
-        <Routes>
-          <Route path='*' element ={ <NotFoundPage /> } />
-          <Route path='/' element={ <Main /> } />
-          <Route path='/movies' element={ <Movies cards={cards} /> } />
-          <Route path='/saved-movies' element={ <SavedMovies cards={cards} /> } />
-          <Route path='/profile' element={ <Profile user={user}/> } />
-          <Route path='/signup' element={ <Register /> } />
-          <Route path='/signin' element={ <Login /> } />
-        </Routes>
-        <NavTab isOpen={isMenuOpen} onClose={() => {setIsMenuOpne(state => !state)}}/>
-        </main>
-      </BrowserRouter>
+      <CurrentUserContext.Provider value={currentUser}>
+        <BrowserRouter>
+          <Header onMenuClick={() => {setIsMenuOpne(state => !state)}}/>
+          <main className="main">
+          <Routes>
+            <Route path='*' element ={ <NotFoundPage /> } />
+            <Route path='/' element={ <Main /> } />
+            <Route path='/movies' element={ <ProtectedRouteElement element={ <Movies /> } />} />
+            <Route path='/saved-movies' element={ <ProtectedRouteElement element={ <SavedMovies /> }/> } />
+            <Route path='/profile' element={ <ProtectedRouteElement element={ <Profile onEdit={loadUserInfo}/> }/> } />
+            <Route path='/signup' element={ <Register onLogin={loadUserInfo}/> } />
+            <Route path='/signin' element={ <Login onLogin={loadUserInfo}/> } />
+          </Routes>
+          <NavTab isOpen={isMenuOpen} onClose={() => {setIsMenuOpne(state => !state)}} />
+          </main>
+        </BrowserRouter>
+      </CurrentUserContext.Provider>
     </div>
   );
 }
