@@ -13,7 +13,7 @@ function Portfolio() {
           <span className="portfolio__link-text">Адаптивный сайт</span>
           <span className="portfolio__link-arrow">↗</span>
         </a>
-        <a href="https://github.com/DeWhiteMold/react-mesto-api-full-gha" className="portfolio__link" rel="noreferrer" target="_blank">
+        <a href="https://dewhiteproject.nomoredomains.monster/sing-in" className="portfolio__link" rel="noreferrer" target="_blank">
           <span className="portfolio__link-text">Одностраничное приложение</span>
           <span className="portfolio__link-arrow">↗</span>
         </a>
